@@ -1,0 +1,72 @@
+---------------------------         IOCLA          ----------------------------
+
+Tema 1: Convertor 
+Nume : Niculescu
+Prenume : Mihai Alexandru
+Grupa : 325CB
+Sistem de operare : Ubuntu 16.04 LTS 64bit & Windows 10 64bit
+Editor : SASM
+Fisiere: tema1.asm README
+
+-------------------------------------------------------------------------------
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    Tema foloseste algoritmul de conversie pentru un numar din baza 10, in alta
+utilizand impartiri succesive. Numarul( nums_array[i]) se imparte succesiv la 
+base_array[i]( impartitorul) pana cand numarul ajunge 0, la fiecare impartire 
+se salveaza restul pe stiva.  Numarul in baza base_array[i], este numarul 
+obtinut prin "concatenarea" resturilor de la ultimul obtinut la primul. Pentru
+ bazele 10,..., 16  resturile mai mari ca 9 sunt "inlocuite" echivalentul lor 
+10 este a, b este b, etc. 
+
+	Variabile folosite:
+*) base -> vector de caractere, ce reprezinta caracterele prin care sunt 
+repezantate numerele in baza cea mai mare( caracterele pentru baza mai "mici" 
+find incluse).Daca am fi avut de repezenta numare pana la baza 18, base ar fi 
+fost "0123456789abcdefgh". Avantajul fiind ca pe pozitia i din vector se afla 
+caracterul ce reprezinta valoarea respenctiva in baza corespunzatoare.
+Exemplu: pentru 10: base[10] = a, resturile avand valori [0, baza - 1], unde 
+baza este baza in care se face conversia.
+*) error -> mesajul eroare
+*) count -> repezinta numarul de resturi obtinute la impartirea sucesiva.
+
+  Secventa de cod in C "echivalenta" este:
+
+	int count = 0;
+    char base[] = "0123456789abcdef";
+    char error[] = "Baza incorecta";
+    // label-ul Do_While_1
+    do{
+        //initializare nums_array[i]
+        //initializare base_array[i]
+        //ecx este echivalent cu i
+
+        if( base_array[i] < MIN_BASE || base_arry[i] > MAX_BASE ) 
+            goto print_error;
+
+		// label-ul Do_While_impartire
+        do{
+            push(nums_array[i] % base_array[i] ); // push edx
+            nums_array[i] = nums_array[i] / base_array[i];
+            count++;
+        }while(nums_array[i] > 0);
+
+		// label-ul print
+        do{
+            // j este echivalentul lui edx
+            pop(&j);
+            printf("%c", base[j] ); // mov al, [base + edx]
+            count--;
+        }while(n > 0);
+        printf("\n");
+
+return_print_error:
+    }while(i < nums);
+
+print_error:
+    printf("%s", error);
+    printf("\n");
+    goto return_print_error;
+	
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
